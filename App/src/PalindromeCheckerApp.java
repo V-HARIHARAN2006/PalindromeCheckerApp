@@ -1,7 +1,13 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
-class PalindromeChecker {
+interface PalindromeStrategy {
+    boolean checkPalindrome(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
 
     public boolean checkPalindrome(String input) {
 
@@ -21,6 +27,26 @@ class PalindromeChecker {
     }
 }
 
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean checkPalindrome(String input) {
+
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            deque.addLast(input.charAt(i));
+        }
+
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -30,9 +56,18 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        PalindromeChecker checker = new PalindromeChecker();
+        System.out.println("Choose strategy: 1 for Stack, 2 for Deque");
+        int choice = scanner.nextInt();
 
-        boolean result = checker.checkPalindrome(input);
+        PalindromeStrategy strategy;
+
+        if (choice == 1) {
+            strategy = new StackStrategy();
+        } else {
+            strategy = new DequeStrategy();
+        }
+
+        boolean result = strategy.checkPalindrome(input);
 
         if (result) {
             System.out.println("Result: It is a Palindrome");
