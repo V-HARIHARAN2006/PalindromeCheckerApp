@@ -1,12 +1,3 @@
-/**
- * ======================================================
- * MAIN CLASS - PalindromeCheckerApp
- * ======================================================
- *
- * UC4: Check whether a string is a palindrome by reversing it
- * using user input.
- */
-
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
@@ -15,23 +6,20 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Take input from user
         System.out.print("Enter a string: ");
         String original = scanner.nextLine();
 
-        // Variable to store reversed string
+        String input = original.toLowerCase();
+
         String reversed = "";
 
-        // Reverse string using loop
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
         }
 
-        // Display reversed string
         System.out.println("Reversed String: " + reversed);
 
-        // Compare original and reversed
-        if (original.equals(reversed)) {
+        if (input.equals(reversed)) {
             System.out.println("Result: It is a Palindrome");
         } else {
             System.out.println("Result: It is NOT a Palindrome");
